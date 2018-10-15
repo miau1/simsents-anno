@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open('~/secret.txt') as f:
+with open('/home/user/secret.txt') as f:
     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -65,7 +65,7 @@ ROOT_URLCONF = 'simsents.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['~/myproject/simsents-anno/annotate/templates'],
+        'DIRS': ['/home/user/myproject/simsents-anno/annotate/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'simsents.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-with open('~/dbusr.txt') as f:
+with open('/home/user/dbusr.txt') as f:
     DBUSR = f.read().strip()
-with open('~/dbpw.txt') as f:
+with open('/home/user/dbpw.txt') as f:
     DBPW = f.read().strip()
-with open('~/db.txt') as f:
+with open('/home/user/db.txt') as f:
     DB = f.read().strip()
 
 DATABASES = {
