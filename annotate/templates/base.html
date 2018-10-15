@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Annotate</title>
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.7.1.min.js"></script>
+  <style type="text/css">
+	#l1, #l2 {
+		font-size: 18px;
+		border: 2px solid black;
+    	border-radius: 5px;
+		padding: 25px;
+		margin: 25px;
+	}
+	
+	#trash {
+		height: 50px;
+    	width: 50px;
+	}
+
+	#navul {
+		list-style-type: none;
+		margin: 10;
+		padding: 10;
+	}
+
+	#navli {
+		display: inline;
+	}
+
+	table, th, td {
+    	border: 3px solid black;
+	}
+
+	table {
+		position: relative;
+   	 	left: 30px;
+		margin-bottom: 30px;
+	}
+
+	th, td {
+		padding: 5px;
+	}
+
+	hr {
+		border: 0;
+		clear:both;
+		display:block;
+		width: 96%;               
+		background-color:black;
+		height: 1px;
+	}
+
+  </style>
+</head>
+
+<ul id="navul">
+	<li id="navli"><span style="font-size: 150%;">Opusparcus</span> (Open Subtitles Paraphrase Corpus) |</li>
+	{% if user.is_superuser %}
+	<li id="navli"> <a href="{% url 'user' %}">{{user}}</a> |</li>
+	{% else %}
+	<li id="navli"> <a href="{% url 'user' %}">Language & Settings</a> |</li>
+	{% endif %}
+	<li id="navli"> <a href="{% url 'continue' %}">Continue annotating</a> |</li>
+	<li id="navli"> de: {{stats.0}} |</li>
+	<li id="navli"> en: {{stats.1}} |</li>
+	<li id="navli"> fi: {{stats.2}} |</li>
+	<li id="navli"> fr: {{stats.3}} |</li>
+	<li id="navli"> ru: {{stats.4}} |</li>
+	<li id="navli"> sv: {{stats.5}} </li>
+	{% if user.is_superuser %}
+	<li id="navli"> <a  href="{% url 'logout' %}">| Logout</a> </li>
+	{% endif %}
+</ul> 
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

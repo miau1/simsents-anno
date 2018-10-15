@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div id="lt">
+	<p class="text-center" id="l1" style="font-family: Menlo,Monaco,Consolas,'Courier New',monospace; font-size: 20px">{{pair.sent1}}</p>
+	<p class="text-center" id="l2" style="font-family: Menlo,Monaco,Consolas,'Courier New',monospace; font-size: 20px">{{pair.sent2}}</p>
+</div>
+
+<div class="text-center">
+	<form action="{% url 'annotate' pair.id %}" method="post">
+	{% csrf_token %}
+	<input name="category" value="1" style ="background-color:red" class="btn btn-lg" type="submit" id="1" />
+
+	<input name="category" value="2" style ="background-color:yellow" class="btn btn-lg" type="submit" id="2" />
+
+	<input name="category" value="3" style ="background-color:lime" class="btn btn-lg" type="submit" id="3" />
+
+	<input name="category" value="4" style ="background-color:green" class="btn btn-lg" type="submit" id="4" />
+
+	<button name="category" value="-1" style ="margin-left: 80px" type="submit" class="btn btn-lg" id="-1" >
+		<img src="https://d30y9cdsu7xlg0.cloudfront.net/png/3058-200.png" id = "trash" />
+	</button>
+
+	</form>
+</div>
+
+</br>
+
+<table style="width:95%" id="table">
+  <col width="40">
+  <col width="130">
+  <col width="130">
+  <tr id="table">
+    <th id="table">Category</th>
+    <th id="table">Description</th>
+    <th id="table">Examples</th>
+  </tr>
+  <tr id = "good">
+    <td id = "good">Good, "Dark green", 4</td>
+    <td id = "good">The two sentences can be used in the same situation and essentially "mean the same thing" .</td>
+    <td id = "good">It was a last minute thing. ↔  This wasn't planned.<br>
+Honey, look. ↔ Um, honey, listen.<br>
+I have goose flesh. ↔ The hair's standing up
+on my arms.</td>
+  </tr>
+  <tr  id = "mgood">
+    <td  id = "mgood">Mostly good, "Light green", 3</td>
+    <td  id = "mgood">It is acceptable to think that the two sentences refer to the same thing, although one sentence
+might be more specific than the other one, or there are differences in style,
+such as polite form versus familiar form. There may also be differences in gender,
+number or tense, etc if these differences are of minor importance for the phrases as a whole,
+such as masculine or feminine agreement of French adjectives.</td>
+    <td  id = "mgood">Hang that up. ↔ Hang up the phone.<br>
+Go to your bedroom. ↔ Just go to sleep.<br>
+Next man, move it. ↔ Next, please.<br>
+Calvin, now what? ↔ What are we doing?<br>
+Good job. ↔ Right, good game, good game.<br>
+Tu es fatigué? ↔ Vous êtes fatiguée?<br>
+Den är fånig. ↔ Det är dumt.<br>
+Olet myöhässä. ↔ Te tulitte liian myöhään.</td>
+  </tr>
+  <tr id = "mbad">
+    <td id = "mbad">Mostly bad, "Yellow", 2</td>
+    <td id = "mbad">There is some connection between the sentences that explains why they occur together,
+but one would not really consider them to mean the same thing. There may also be differences in gender,
+ number, tense etc that are important for the meaning of the phrases as a whole.</td>
+    <td id = "mbad">Another one? ↔ Partner again?<br>
+Did you ask him? ↔ Have you asked her?<br>
+Hello, operator? ↔ Yes, operator, I'm trying to get to the police.<br>
+Isn't that right? ↔ Well, hasn't it?<br>
+Get them up there. ↔ Put your hands in the air.<br>
+I thought you might. ↔ Yeah, didn't think so.<br>
+I am on my way. ↔ We are coming. </td>
+  </tr>
+  <tr id = "bad">
+    <td id = "bad">Bad, "Dark red", 1</td>
+    <td id = "bad">There is no obvious connection. The sentences mean different things.
+</td>
+    <td id = "bad">She's over there. ↔ Take me to him.<br>
+All the cons. ↔ Nice and comfy.</td>
+  </tr>
+  <tr id = "trashcol">
+    <td id = "trashcol">Trash</td>
+    <td id = "trashcol">At least one of the sentences is invalid in some of the following ways:
+  <br>-The language of the sentence is wrong, such as an English phrase in the French annotation data.
+  <br>-There are spelling mistakes or the sentence is syntactically misformed.
+  <br>However, sloppy punctuation or capitalization can be ignored and the sentence can be accepted.</td>
+    <td id = "trashcol">Estoy buscando a mi hermana. ↔ I'm looking for my sister.<br>
+Now, watch what yöu're saying. ↔ Watch your mouth. <br>
+Adolfo Where can I find? ↔ Where I can find Adolfo?</td>
+  </tr>
+</table>
+
+
+<script>
+	$(document).keypress(function(event){
+		var num = String.fromCharCode(event.which);
+		if (num > 0 && num < 5) {
+			document.getElementById(num).click()
+		}
+	});
+</script>
+
+{% endblock %}
+

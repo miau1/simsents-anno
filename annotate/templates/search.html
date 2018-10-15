@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+
+        <form action="{% url 'searchoption' %}" method="post">
+                {% csrf_token %}
+                User:
+                <select name="username">
+                        <option value="empty" {% if sel_name == 'empty' %}selected="selected"{% endif %}>Any user</option>
+                        {% for u in users %}
+                                <option value={{u.username}} {% if u.username == sel_name %}selected="selected"{% endif %}>{{u.username}}</option>
+                        {% endfor %}
+                </select>
+                Language:
+                <select name="language">
+                        <option value="empty" {% if sel_name == 'empty' %}selected="selected"{% endif %}>Any language</option>
+                        {% for l in languages %}
+                                <option value={{l}} {% if l == sel_lang %}selected="selected"{% endif %}>{{l}}</option>
+                        {% endfor %}
+                </select>
+                Order by:
+                <select name="order">
+                        {% for o in orders %}
+                                <option value={{o.1}} {% if o.1 == sel_order %}selected="selected"{% endif %}>{{o.0}}</option>
+                        {% endfor %}
+                <input type="checkbox" style="margin-left: 35px;" name="printable" value="printable"><span style="margin-right: 35px;">Printable form</span></input>
+
+                <input type="submit" value="Search"/>
+        </form>
+
+        <hr>
+
+        <table style="width:95%" id="table">
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <tr id="table">
+                        <th id="table">ID</th>
+                        <th id="table">SentID</th>
+                        <th id="table">Sentence 1</th>
+                        <th id="table">Sentence 2</th>
+                        <th id="table">Language</th>
+                        <th id="table">Username</th>
+                        <th id="table">Category</th>
+                        <th id="table">Date</th>
+                </tr>
+                        {% for a in anno %}
+                                <tr>
+					<td>{{a.sentencepair.id}}</td>
+                                        <td>{{a.sentencepair.sentID}}</td>
+                                        <td>{{a.sentencepair.sent1}}</td>
+                                        <td>{{a.sentencepair.sent2}}</td>
+                                        <td>{{a.sentencepair.lang}}</td>
+                                        <td>{{a.name}}</td>
+                                        <td>{{a.category}}</td>
+                                        <td>{{a.date}}</td>
+                                </tr>
+                        {% endfor %}
+        </table>
+
+</div>
+
+{% endblock %}
+

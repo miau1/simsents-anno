@@ -1,0 +1,4 @@
+D1	This is test sentence fr.1.1.	This is test sentence fr.1.2.
+T1	This is test sentence fr.2.1.	This is test sentence fr.2.2.
+D2	This is test sentence fr.3.1.	This is test sentence fr.3.2.
+T2	This is test sentence fr.4.1.	This is test sentence fr.4.2.

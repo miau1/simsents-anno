@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+
+{% for s in stat %}
+<h2><a href="{% url 'lang' s.0  %}">{{ s.0 }}</a> / <a href="{% url 'discarded' s.0  %}">discarded</a></h2>
+
+Green: {{ s.1 }}<span style="left: 30%; position: absolute;">Incomplete: {{ s.6 }}</span>
+<br>
+Light green: {{ s.2 }}<span style="left: 30%; position: absolute;">Incomplete: {{ s.7 }}</span>
+<br>
+Yellow: {{ s.3 }}<span style="left: 30%; position: absolute;">Incomplete: {{ s.8 }}</span>
+<br>
+Red: {{ s.4 }}<span style="left: 30%; position: absolute;">Incomplete: {{ s.9 }}</span>
+<br>
+Trash: {{ s.5 }}<span style="left: 30%; position: absolute;">Incomplete: {{ s.10 }}</span>
+<hr>
+{% endfor %}
+<br><br>
+
+<h2>Recent annotations:</h2>
+
+{% for a in annotations %}
+{{ a.sentencepair.id }} | {{ a.sentencepair.sentID }} | {{ a.sentencepair.sent1 }} | {{ a.sentencepair.sent2 }} | {{ a.category }} | {{ a.name }} | {{ a.date }} <br>
+{% endfor %}
+</div>
+
+{% endblock %}

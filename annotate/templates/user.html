@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+	
+	{% if messages %}
+		<ul class="messages">
+    	{% for message in messages %}
+    		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}><h4 style="color:green">{{ message }}</h4></li>
+    	{% endfor %}
+		</ul>
+	{% endif %}
+
+	{% if user.is_superuser %}
+	<h1>{{user.username}}</h1>
+	{% else %}
+	<h1>Anonymous user</h1>
+	{% endif %}
+
+	{% if user.is_superuser %}
+		<a href="/admin">Admin site</a> |
+		<a href="{% url 'applications' %}">Applications</a> |
+		<a href="{% url 'db' %}">Overall annotations</a> | 
+		<a href="/search/user/language/-date">Search</a> |
+		<a href="/userstats">Users</a>
+	{% endif %}
+
+	<h4>Current language: {{user.annotator.lang}}</h4>
+
+	<hr>
+
+	Change language:
+
+	<form action="{% url 'changelang' %}" method="post">
+	{% csrf_token %}
+	<select name="language">
+		{% for l in languages %}
+			<option value={{l}} {% if user.annotator.lang == l %}selected="selected"{% endif %}>{{l}}</option>
+		{% endfor %}
+	</select>
+	<input type="submit" value="Change" />
+	</form>
+
+	<hr>
+	
+	{% if user.is_superuser %}
+	Change password:
+	<form action="{% url 'newpass' %}" method="post">
+		{% csrf_token %}
+		<label>New password</label>
+		<input type="password" id="password" name="password"/>
+		<input type="submit" value="Change password" />
+	</form>
+
+	<hr>
+	{% endif %}	
+
+	<h4>Your recent annotations: </h4>
+
+	<table style="width:95%" id="table">
+	  <col>
+	  <col>
+	  <col>
+	  <col>
+	  <col>
+	  <tr id="table">
+		<th id="table">Sentence 1</th>
+		<th id="table">Sentence 2</th> 
+		<th id="table">Category</th>
+		<th id="table">Date</th>
+		<th id="table">Edit</th>
+	  </tr>
+		{% for a in annotations %}
+		  <tr>
+			<td>{{a.sentencepair.sent1}}</td>
+			<td>{{a.sentencepair.sent2}}</td>
+			<td>{{a.category}}</td>
+			<td>{{a.date}}</td>
+			<td><a href="{% url 'edit' a.sentencepair.id a.sentencepair.lang %}">Edit</a></td>
+		  </tr>
+		{% endfor %}
+	</table>
+
+
+</div>
+{% endblock %}

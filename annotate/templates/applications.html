@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+
+<table id="table">
+  <col>
+  <col>
+  <col>
+  <tr id="table">
+<th id="table">Name</th>
+<th id="table">Email</th> 
+<th id="table"></th>
+  </tr>
+{% for a in applications %}
+  <tr>
+<td>{{a.name}}</td>
+<td>{{a.email}}</td>
+<td><a href="/appl/{{a.id}}">Delete</a></td>
+  </tr>
+{% endfor %}
+</table>
+
+</div>
+
+{% endblock %}

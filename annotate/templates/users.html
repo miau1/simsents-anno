@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+
+{% for u in users %}
+<h3>{{ u.0 }}</h3>
+de: {{ u.1 }}
+<br>
+en: {{ u.2 }}
+<br>
+fi: {{ u.3 }}
+<br>
+fr: {{ u.4 }}
+<br>
+ru: {{ u.5 }}
+<br>
+sv: {{ u.6 }}
+<br>
+<hr>
+{% endfor %}
+
+{% endblock %}

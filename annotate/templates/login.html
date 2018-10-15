@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+
+	{% if error_message %}<p><strong style ="color:red">{{ error_message }}</strong></p>{% endif %}
+
+	{% if messages %}
+		<ul class="messages">
+    	{% for message in messages %}
+    		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}><h4 style="color:green">{{ message }}</h4></li>
+    	{% endfor %}
+		</ul>
+	{% endif %}
+
+	<h3>Sign in</h3>
+
+	<form action="{% url 'userlogin' %}" method="post">
+		{% csrf_token %}
+		<label>Username</label>
+		<input type="textbox" id="username" name="username"/>
+		<br><br>
+		<label>Password</label>
+		<input type="password" id="password" name="password"/>
+		<br><br>
+		<input type="submit" value="Login" />
+
+	</form>
+
+	<hr>
+
+	<h3>Sign up</h3>		
+
+	<form action="{% url 'signup' %}" method="post">
+		{% csrf_token %}
+		<label>Full name</label>
+		<input type="textbox" id="fullname" name="fullname"/>
+		<br><br>
+		<label>Email address</label>
+		<input type="textbox" id="email" name="email"/>
+		<br><br>
+		<input type="submit" value="Sign up" />
+
+	</form>
+
+</div>
+
+{% endblock %}
