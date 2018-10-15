@@ -162,7 +162,7 @@ In simsents/settings.py, update paths to dbusr.txt, dbpw.txt and db.txt.
 Psycopg2 allows us to use PostgresSQL database with a Python application. Installation:
 
 ```
-pip3 install psycopg2
+pip3 install psycopg2-binary
 ```
 
 Migrate data structures to the database:
@@ -240,6 +240,12 @@ Your /etc/apache2/sites-available/000-default.conf should now look like this (wi
 </VirtualHost>
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+```
+
+Enable SSL mod:
+
+```
+sudo a2enmod ssl
 ```
 
 Start Apache server
