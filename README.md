@@ -226,7 +226,7 @@ Your /etc/apache2/sites-available/000-default.conf should now look like this (wi
 
         WSGIDaemonProcess simsents python-path=/path/to/myproject/simsents-anno python-home=/path/to/myproject/myprojectenv
         WSGIProcessGroup simsents
-        WSGIScriptAlias / /path/to/myproject/simsents-anno/siments/wsgi.py
+        WSGIScriptAlias / /path/to/myproject/simsents-anno/simsents/wsgi.py
 
         <Directory /path/to/myproject/simsents-anno/simsents>
         <Files wsgi.py>
@@ -254,9 +254,9 @@ Start Apache server
 sudo systemctl start apache2
 ```
 
-The web site now works at https://yourhostname.com.
+The website now works at https://yourhostname.com.
 
-The first thing you need to do is associate the superuser to an annotator object. The web site doesn't work for users, who are not paired with annotator objects:
+The first thing you need to do is associate the superuser to an annotator object. The website doesn't work for users, who are not paired with annotator objects:
 
 - Go to https://yourhostname.com/admin
 - Login with superuser credentials
