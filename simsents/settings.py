@@ -65,7 +65,7 @@ ROOT_URLCONF = 'simsents.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['~/myproject/simsents/annotate/templates'],
+        'DIRS': ['~/myproject/simsents-anno/annotate/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
